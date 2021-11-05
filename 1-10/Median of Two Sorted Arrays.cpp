@@ -5,24 +5,31 @@ public:
         vector<int> combined;
         auto it1 = nums1.begin();
         auto it2 = nums2.begin();
-        for (int i = 0; i < nums1.size() + nums2.size(); i++)
+        if (&it1 == NULL)
         {
-            combined.push_back(min(*it1, *it2));
-            if (*it1 > *it2)
+            combined.insert(combined.end(), it2, nums2.end());
+        } else if (&it2 == NULL) {
+            combined.insert(combined.end(), it1, nums1.end());
+        } else {
+            for (int i = 0; i < nums1.size() + nums2.size(); i++)
             {
-                if (it2 == nums2.end() - 1)
+                combined.push_back(min(*it1, *it2));
+                if (*it1 > *it2)
                 {
-                    combined.insert(combined.end(), it1, nums1.end());
-                    break;
+                    if (it2 == nums2.end() - 1)
+                    {
+                        combined.insert(combined.end(), it1, nums1.end());
+                        break;
+                    }
+                    it2 = next(it2);
+                } else {
+                    if (it1 == nums1.end() - 1)
+                    {
+                        combined.insert(combined.end(), it2, nums2.end());
+                        break;
+                    }
+                    it1 = next(it1);
                 }
-                it2 = next(it2);
-            } else {
-                if (it1 == nums1.end() - 1)
-                {
-                    combined.insert(combined.end(), it2, nums2.end());
-                    break;
-                }
-                it1 = next(it1);
             }
         }
         //find median of combined array
@@ -30,7 +37,7 @@ public:
         {
             return combined[combined.size() / 2];
         } else {
-            return (combined[combined.size() - 1] + combined[combined.size()]) / 2;
+            return (double) (combined[(combined.size() / 2) - 1] + combined[combined.size() / 2]) / 2;
         }
     }
 };
