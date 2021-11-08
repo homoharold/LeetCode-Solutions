@@ -3,14 +3,14 @@ public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         //combine both arrays
         vector<int> combined;
-        auto it1 = nums1.begin();
-        auto it2 = nums2.begin();
-        if (&it1 == NULL)
+        if (nums1.size() == 0)
         {
-            combined.insert(combined.end(), it2, nums2.end());
-        } else if (&it2 == NULL) {
-            combined.insert(combined.end(), it1, nums1.end());
+            combined.insert(combined.end(), nums2.begin(), nums2.end());
+        } else if (nums2.size() == 0) {
+            combined.insert(combined.end(), nums1.begin(), nums1.end());
         } else {
+            auto it1 = nums1.begin();
+            auto it2 = nums2.begin();
             for (int i = 0; i < nums1.size() + nums2.size(); i++)
             {
                 combined.push_back(min(*it1, *it2));
