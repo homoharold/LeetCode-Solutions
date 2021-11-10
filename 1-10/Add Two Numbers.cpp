@@ -20,13 +20,13 @@ public:
             int y = (q.val != 11) ? q.val : 0;
             int sum = x + y + carry;
             carry = sum / 10;
-            (*curr).next = new ListNode(sum % 10);
+            curr -> next = new ListNode(sum % 10);
             curr = (*curr).next;
             p = (p.next != NULL) ? *p.next : ListNode(11);
             q = (q.next != NULL) ? *q.next : ListNode(11);
         }
         if (carry > 0) {
-            (*curr).next = new ListNode(carry);
+            curr -> next = new ListNode(carry);
         }
         return head.next;
     }
